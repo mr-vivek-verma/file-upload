@@ -6,6 +6,7 @@ import axios from 'axios';
 function FileUpload() {
 
   const [file, setFile] = useState()
+const [url, setUrl] = useState()
 
   function handleChange(event) {
     const textFile = /(\.doc|\.docx|\.odt|\.pdf|\.tex|\.txt|\.rtf|\.wps|\.wks|\.wpd)$/i;
@@ -14,8 +15,9 @@ function FileUpload() {
     if(file.name.split(".")[1]==="txt"){
     }
    else{
-    alert("Invalid file")
-    setFile("");
+    return(
+    alert("Invalid file"),
+    setFile(""))
    } 
   setFile(event.target.files[0])
   }
@@ -47,13 +49,16 @@ function FileUpload() {
     
     axios(config)
     .then(function (response) {
+      setUrl(response.data)
       console.log(JSON.stringify(response.data));
     })
     .catch(function (error) {
-      console.log(error);
+      alert("Please check the file")
     });
   }
 
+
+  console.log("url", url)
   return (
     <div className="main-div">
         <div className='inner-div'>
@@ -64,7 +69,9 @@ function FileUpload() {
           <button className='btn' type="submit">Upload Files</button>
           <h5>File extension should be txt</h5>  
         </form>
-        
+        {!url? "" : <div>
+        <p>You can download/share file using below link </p>
+        <span>{url?.link}</span> </div> }
         </div>
     </div>
   );
