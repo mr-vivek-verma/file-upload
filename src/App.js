@@ -3,7 +3,8 @@ import FileUpload from "./components/FileUpload/index"
 function App() {
   return (
     <>
-    <FileUpload/>
+  
+  <FileUpload/>
     </>
   );
 }
