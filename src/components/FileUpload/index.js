@@ -9,12 +9,14 @@ function FileUpload() {
 
   function handleChange(event) {
     const textFile = /(\.doc|\.docx|\.odt|\.pdf|\.tex|\.txt|\.rtf|\.wps|\.wks|\.wpd)$/i;
+    console.log("text",textFile)
     const file = event.target.files[0];
-    if(!file?.type.match(textFile))
-    {
-      alert("Invalid file")
-      return setFile("");
+    if(file.name.split(".")[1]==="txt"){
     }
+   else{
+    alert("Invalid file")
+    setFile("");
+   } 
   setFile(event.target.files[0])
   }
   
