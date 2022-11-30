@@ -28,7 +28,7 @@ const [url, setUrl] = useState()
     // const url = 'https://file.io/W51bFtAy8FaT';
     const formData = new FormData();
     console.log("file",file)
-    formData.append('expires', '20221130');
+    formData.append('expires', '20221201');
     formData.append('maxDownloads', '1');
     formData.append('autoDelete', 'true');
     formData.append('file',file);
@@ -64,7 +64,6 @@ const [url, setUrl] = useState()
         <div className='inner-div'>
         <form className='frm' onSubmit={handleSubmit}>
           <h1>File Upload</h1>
-          
           <input type="file" onChange={handleChange}/>
           <button className='btn' type="submit">Upload Files</button>
           <h5>File extension should be txt</h5>  
