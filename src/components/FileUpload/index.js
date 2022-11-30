@@ -1,10 +1,11 @@
 import './style.css';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 
 function FileUpload() {
-
+  const navigate = useNavigate();
   const [file, setFile] = useState()
 const [url, setUrl] = useState()
 
@@ -57,20 +58,24 @@ const [url, setUrl] = useState()
     });
   }
 
-
+  useEffect(()=>{
+    localStorage.setItem("items", JSON.stringify(url? url:""))
+  },[url, localStorage])
+  
   console.log("url", url)
   return (
     <div className="main-div">
         <div className='inner-div'>
         <form className='frm' onSubmit={handleSubmit}>
           <h1>File Upload</h1>
-          <input type="file" onChange={handleChange}/>
-          <button className='btn' type="submit">Upload Files</button>
+          <input type="file" multiple onChange={handleChange}/>
+          <button className='btn' type="submit">Upload File</button>
           <h5>File extension should be txt</h5>  
-        </form>
+           </form>
         {!url? "" : <div>
         <p>You can download/share file using below link </p>
         <span>{url?.link}</span> </div> }
+        <button className='btn1' onClick={() => navigate("table")}>Show Download List</button>
         </div>
     </div>
   );
