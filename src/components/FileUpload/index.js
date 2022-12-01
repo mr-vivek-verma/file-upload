@@ -8,7 +8,7 @@ function FileUpload() {
   const navigate = useNavigate();
   const [file, setFile] = useState()
 const [url, setUrl] = useState()
-
+const [error, setError]=useState("");
   function handleChange(event) {
     const textFile = /(\.doc|\.docx|\.odt|\.pdf|\.tex|\.txt|\.rtf|\.wps|\.wks|\.wpd)$/i;
     console.log("text",textFile)
@@ -17,8 +17,8 @@ const [url, setUrl] = useState()
     }
    else{
     return(
-    alert("Invalid file"),
-    setFile(""))
+    setError("Invalid file selected !",
+    setFile("")))
    } 
   setFile(event.target.files[0])
   }
@@ -26,10 +26,9 @@ const [url, setUrl] = useState()
 
   function handleSubmit(event) {
     event.preventDefault()
-    // const url = 'https://file.io/W51bFtAy8FaT';
     const formData = new FormData();
     console.log("file",file)
-    formData.append('expires', '20221201');
+    formData.append('expires', '20221202');
     formData.append('maxDownloads', '1');
     formData.append('autoDelete', 'true');
     formData.append('file',file);
@@ -52,15 +51,19 @@ const [url, setUrl] = useState()
     .then(function (response) {
       setUrl(response.data)
       console.log(JSON.stringify(response.data));
+      
+  localStorage.setItem('items', JSON.stringify(response));
     })
     .catch(function (error) {
-      alert("Please check the file")
-    });
+         });
   }
 
-  useEffect(()=>{
-    localStorage.setItem("items", JSON.stringify(url? url:""))
-  },[url, localStorage])
+  // useEffect(()=>{
+  //   // localStorage.setItem("items", JSON.stringify(url? url: url))
+ 
+  //     localStorage.setItem('items', JSON.stringify("items", JSON.stringify(url)));
+
+  // },[url, localStorage])
   
   console.log("url", url)
   return (
@@ -70,11 +73,10 @@ const [url, setUrl] = useState()
           <h1>File Upload</h1>
           <input type="file" multiple onChange={handleChange}/>
           <button className='btn' type="submit">Upload File</button>
-          <h5>File extension should be txt</h5>  
            </form>
-        {!url? "" : <div>
-        <p>You can download/share file using below link </p>
-        <span>{url?.link}</span> </div> }
+           <div>
+           {error? <h2>{error}</h2> :  <span></span>}
+           </div>
         <button className='btn1' onClick={() => navigate("table")}>Show Download List</button>
         </div>
     </div>

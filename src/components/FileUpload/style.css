@@ -68,3 +68,29 @@ table {
     text-align: left;
     border-bottom: 1px solid #ddd;
   }
+
+  img{
+    width: 40px;
+    margin-left: 30px;
+  }
+  button{
+    cursor: pointer;
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    -webkit-box-align: center;
+    align-items: center;
+   background-color: rgb(240, 46, 46);
+   border-color:rgb(240, 46, 72) ;
+    width: 45%;
+    margin-left: 10px;
+    border-radius: 6px;
+    color: #ffff;
+    font-size: 1rem;
+    line-height: 1.5rem;
+  }
+
+  .main-div h2{
+    color: red;
+  }
