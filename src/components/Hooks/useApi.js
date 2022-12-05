@@ -29,7 +29,7 @@ const [error, setError]=useState("");
     event.preventDefault()
     const formData = new FormData();
     console.log("file",file)
-    formData.append('expires', '20221202');
+    formData.append('expires', '20221206');
     formData.append('maxDownloads', '1');
     formData.append('autoDelete', 'true');
     formData.append('file',file);
